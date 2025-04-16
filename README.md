@@ -15,7 +15,55 @@ A complete hardware-software flow encompasses:
 2. execution of the target applications and corresponding collection of side-channel information,
 3. analysis to identify SCA vulnerabilities and leakage sources.
 
-For more details, please see our [Transactions on Computers article](https://ieeexplore.ieee.org/document/10929027):
+For more details, please see our [Transactions on Computers article](https://ieeexplore.ieee.org/document/10929027).
+
+## Organization
+
+The repository is organized as follows:
+
+- `/hardware_flow`: Contains the verilog files for the JARVIS implementation and the scripts to implement it on FPGA.
+- `/sca_framework`: Contains the Python side-channel analysis framework, encompassing scripts and notebooks for implementing various attack types.
+- `/software_flow`: Contains C implementations of ciphers with side-channel countermeausre, a modified FreeRTOS implementation with a random scheduler, and the script to compile for RISC-V.
+
+```
+.
+├── hardware_flow
+│   ├── config_DFS/
+│   ├── hdl_src/
+│   └── vivado_flow/
+├── sca_framework
+│   ├── attack/
+│   ├── ciphers/
+│   ├── io_dat/
+│   ├── low_level/
+│   ├── sca_utils/
+│   ├── cpa_attack.ipynb
+│   ├── collect_side-channel.ipynb
+│   ├── cnn_attack.ipynb
+│   ├── SNR.ipynb
+│   └── template_attack.ipynb
+└── software_flow
+    ├── bench/
+    ├── compile_scripts/
+    ├── drivers/
+    ├── low_level/
+    ├── readme.md
+    └── RTOS/
+        ├── build.sh
+        ├── demo/
+        └── random_scheduler.patch
+```
+
+## Installation
+
+Refer to the individual `README.md` files within each subdirectory ([hardware_flow](https://github.com/hardware-fab/JARVIS/hardware_flow/readme.md), [sca_framework](https://github.com/hardware-fab/JARVIS/sca_framework/readme.md), and [software_flow](https://github.com/hardware-fab/JARVIS/software_flow/readme.md)) for specific installation instruction.
+
+## Note
+
+This repository has been publish as part of [IEEE Transactions on Computers article](https://ieeexplore.ieee.org/document/10929027).  
+A [preprint version](https://arxiv.org/abs/2407.17432) is also freely available online on arXiv.
+
+
 ```bibtex
 @ARTICLE{Zoni_2025TC-JARVIS,
   author={Zoni, Davide and Galimberti, Andrea and Galli, Davide},
@@ -27,4 +75,6 @@ For more details, please see our [Transactions on Computers article](https://iee
 }
 ```
 
-A [preprint version](https://arxiv.org/abs/2407.17432) is also freely available online on arXiv.
+This repository is protected by copyright and licensed under the [Apache-2.0 license](https://github.com/hardware-fab/JARVIS/LICENSE) file.
+
+© 2025 hardare-fab

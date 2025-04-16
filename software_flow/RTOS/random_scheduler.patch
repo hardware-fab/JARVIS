@@ -1,0 +1,60 @@
+diff --git a/tasks.c b/tasks.c
+index ad3cbdc88..b51e2864b 100644
+--- a/tasks.c
++++ b/tasks.c
+@@ -26,6 +26,12 @@
+  *
+  */
+ 
++// *************************************************
++// Other contributor(s) :   Andrea Galimberti (andrea.galimberti@polimi.it),
++//                          Davide Galli (davide.galli@polimi.it),
++//                          Davide Zoni (davide.zoni@polimi.it)
++// *************************************************
++
+ /* Standard includes. */
+ #include <stdlib.h>
+ #include <string.h>
+@@ -41,6 +47,10 @@
+ #include "timers.h"
+ #include "stack_macros.h"
+ 
++/* JARVIS includes. */
++#include "random_scheduler.h"
++#include "trng.h"
++
+ /* The MPU ports require MPU_WRAPPERS_INCLUDED_FROM_API_FILE to be defined
+  * for the header files above, but not in this file, in order to generate the
+  * correct privileged Vs unprivileged linkage and placement. */
+@@ -208,7 +218,7 @@
+     #define taskRECORD_READY_PRIORITY( uxPriority )    portRECORD_READY_PRIORITY( ( uxPriority ), uxTopReadyPriority )
+ 
+ /*-----------------------------------------------------------*/
+-
++#ifndef RND_SCD_H
+     #define taskSELECT_HIGHEST_PRIORITY_TASK()                                                  \
+     do {                                                                                        \
+         UBaseType_t uxTopPriority;                                                              \
+@@ -218,7 +228,21 @@
+         configASSERT( listCURRENT_LIST_LENGTH( &( pxReadyTasksLists[ uxTopPriority ] ) ) > 0 ); \
+         listGET_OWNER_OF_NEXT_ENTRY( pxCurrentTCB, &( pxReadyTasksLists[ uxTopPriority ] ) );   \
+     } while( 0 )
+-
++#else
++    #define taskSELECT_HIGHEST_PRIORITY_TASK()                                                      \
++    {                                                                                               \
++        UBaseType_t uxTopPriority;                                                                  \
++        /* Find the highest priority list that contains ready tasks. */                             \
++        portGET_HIGHEST_PRIORITY( uxTopPriority, uxTopReadyPriority );                              \
++        configASSERT( listCURRENT_LIST_LENGTH( &( pxReadyTasksLists[ uxTopPriority ] ) ) > 0 );     \
++        if(uxTopPriority==mainAES_TASK_PRIOTIY){                                                    \
++            for(int32_t selector=trng()%THREAD_COUNT;selector>=0;selector--)                        \
++                listGET_OWNER_OF_NEXT_ENTRY( pxCurrentTCB, &( pxReadyTasksLists[ uxTopPriority ])); \
++        }                                                                                           \
++        else                                                                                        \
++            listGET_OWNER_OF_NEXT_ENTRY( pxCurrentTCB, &( pxReadyTasksLists[ uxTopPriority ] ) );   \
++    }
++#endif
+ /*-----------------------------------------------------------*/
+ 
+ /* A port optimised version is provided, call it only if the TCB being reset

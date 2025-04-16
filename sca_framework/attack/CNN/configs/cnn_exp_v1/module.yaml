@@ -1,0 +1,56 @@
+##################################################
+# Authors : 
+#     Andrea Galimberti (andrea.galimberti@polimi.it),
+#     Davide Galli (davide.galli@polimi.it),
+#     Davide Zoni (davide.zoni@polimi.it)
+#     
+# Other contributor(s):  
+#     Francesco Lattari
+#
+# The module architecture has been adapted from the following repository:
+# https://github.com/ANSSI-FR/ASCAD
+# 
+# Original paper:
+# Emmanuel, P., Remi, S., Ryad, B., Eleonora, C., & Cecile, D. (2018).
+# Study of deep learning techniques for side-channel analysis and introduction to ascad database.
+# CoRR, 1-45.
+##################################################
+
+module:
+  name: SboxClassifier
+  config:
+    model:
+      name: CNNASCADTimeSeriesClassifier
+      config:
+        encoder_params:
+          in_size: 1308
+          in_channels: 1
+          encoding_size: 4096
+          base_filters: 64
+          kernel_size: 11
+          use_dropout: False
+          dropout: 0.2 # Choose in [0.2, 0.8] range
+        classifier_params:
+          out_channels: 256
+    loss:
+      name: CrossEntropyLoss
+    optimizer:
+      name: Adam
+      config: 
+        lr: 1e-3
+        weight_decay: 1e-6
+    scheduler:
+      name: ReduceLROnPlateau
+      config:
+        mode: min
+        factor: 0.3 # default 0.1
+        patience: 7 # EarlyStopping is 10
+        verbose: True
+      monitor: valid/loss # probably set as default the same metric as EarlyStopping
+    metrics:
+      - name: Accuracy
+        config:
+          average: macro
+          task: multiclass
+          num_classes: 256
+          multidim_average: global

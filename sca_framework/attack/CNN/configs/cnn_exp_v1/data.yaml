@@ -1,0 +1,17 @@
+##################################################
+# Authors : 
+#     Andrea Galimberti (andrea.galimberti@polimi.it),
+#     Davide Galli (davide.galli@polimi.it),
+#     Davide Zoni (davide.zoni@polimi.it)
+#     
+# Other contributor(s):  
+#     Francesco Lattari
+##################################################
+
+datamodule:
+  name: SboxClassifierDataModule
+  config: 
+    dataset_dir: "</path/to/out/dataset/folder/>"
+    target_byte:  0
+    batch_size:  512
+    num_workers: 8

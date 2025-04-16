@@ -1,0 +1,49 @@
+# Ignore compiled binaries
+*.exe
+*.dll
+*.so
+
+# Ignore logs and temporary files
+*.log
+*.tmp
+
+# Ignore IDE and editor specific files
+.vscode/
+.ipynb_checkpoints/
+*.dcp
+*.jou
+*.wdb
+*.pb
+*.Xil
+
+# Ignore dependencies and build artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.class
+*.o
+*.d
+*.obj
+*.axf
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore compiled C files
+*.out
+*.elf
+*.vmem
+*.objdump
+
+# Ignore compiled SystemVerilog files
+*.vvp
+*.vpi
+*.vcd
+
+# Ignore sensitive or environment-specific files
+.env
+
+# Ignore operating system files
+.DS_Store
+Thumbs.db
