@@ -47,7 +47,6 @@ The repository is organized as follows:
     ├── compile_scripts/
     ├── drivers/
     ├── low_level/
-    ├── readme.md
     └── RTOS/
         ├── build.sh
         ├── demo/
@@ -56,7 +55,7 @@ The repository is organized as follows:
 
 ## Installation
 
-Refer to the individual `README.md` files within each subdirectory ([hardware_flow](https://github.com/hardware-fab/JARVIS/hardware_flow/readme.md), [sca_framework](https://github.com/hardware-fab/JARVIS/sca_framework/readme.md), and [software_flow](https://github.com/hardware-fab/JARVIS/software_flow/readme.md)) for specific installation instruction.
+Refer to the individual `README.md` files within each subdirectory ([hardware_flow](https://github.com/hardware-fab/JARVIS/blob/main/hardware_flow/readme.md), [sca_framework](https://github.com/hardware-fab/JARVIS/blob/main/sca_framework/readme.md), and [software_flow](https://github.com/hardware-fab/JARVIS/blob/main/software_flow/readme.md)) for specific installation instruction.
 
 ## Note
 
@@ -75,6 +74,6 @@ A [preprint version](https://arxiv.org/abs/2407.17432) is also freely available 
 }
 ```
 
-This repository is protected by copyright and licensed under the [Apache-2.0 license](https://github.com/hardware-fab/JARVIS/LICENSE) file.
+This repository is protected by copyright and licensed under the [Apache-2.0 license](https://github.com/hardware-fab/JARVIS/blob/main/LICENSE) file.
 
-© 2025 hardare-fab
+© 2025 hardware-fab
